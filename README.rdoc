@@ -6,9 +6,14 @@ internal storage of incoming messages that can be accessed and retrieved later o
 and/or integration testing as well as developing and profiling email functionality.
 
 == How To Use
-Create SMTP server instance `(com.openag.mocksmtp.Server)` using no-args constructor:
+Create SMTP server instance (com.openag.mocksmtp.Server) using no-args constructor:
 
  Server server = new Server();
+
+Change server host/port if needed (defaults to localhost:2525):
+
+ server.setHost(...);
+ server.setPort(...);
 
 Start the server (this will bind the server socket):
 
@@ -25,3 +30,19 @@ Obtain sent email instances using stack-like mail store:
  MailMessage message = store.popMessage();
 
 You can access mail message headers and body via the MailMessage instance
+
+== Spring configuration
+
+  <!-- The Mock SMTP Server
+        host:port combination specifies where the server socket will be bound to
+        !Bean declaration must declare start/stop lifecycle methods, they will actually
+        do socket binding and resources cleanup afterwards
+   -->
+  <bean id="server" class="com.openag.mocksmtp.Server" init-method="start" destroy-method="stop">
+    <property name="host" value="localhost"/>
+    <property name="port" value="2525"/>
+  </bean>
+
+  <!-- The Mock SMTP storage for incoming mails; the store object can be declared as bean and then
+        injected/autowired to test classes (see SampleSpringConfigurationTest for example) -->
+  <bean id="mailStore" factory-bean="server" factory-method="getMailStore"/>
