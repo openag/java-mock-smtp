@@ -51,13 +51,14 @@ class Connection implements Runnable {
         } while (!(handler instanceof Handlers.Quit));
 
         LOG.debug("Exiting client connection loop for {}", socket.getRemoteSocketAddress());
+
+        mailStore.push(conversation.getMessage());
+
       } finally {
         socket.close();
       }
     } catch (IOException e) {
       throw new RuntimeException("Exception in connection loop", e);
     }
-
-    mailStore.push(conversation.getMessage());
   }
 }

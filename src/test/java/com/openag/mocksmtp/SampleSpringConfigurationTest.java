@@ -38,7 +38,7 @@ public class SampleSpringConfigurationTest {
     message.setText("spring-config-test");
     mailSender.send(message);
 
-    Thread.sleep(100);
+    Thread.sleep(10);
 
     final MailMessage result = mailStore.popMessage();
     assertEquals("spring-config-test", result.getText());

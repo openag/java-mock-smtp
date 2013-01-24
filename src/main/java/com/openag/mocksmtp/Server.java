@@ -26,6 +26,8 @@ public class Server {
 
   private int port = DEFAULT_PORT;
 
+  private boolean threaded = false;
+
   /**
    * Main server socket thread that will wait for connections and submit client connections to shared thread pool
    */
@@ -92,7 +94,13 @@ public class Server {
 
           LOG.debug("Accepted connection from {}", socket.getRemoteSocketAddress());
 
-          childConnectionsService.submit(new Connection(socket, mailStore));
+          final Connection connection = new Connection(socket, mailStore);
+
+          if (threaded) {
+            childConnectionsService.submit(connection);
+          } else {
+            connection.run();
+          }
 
         } catch (IOException e) {
           LOG.debug("Exception in server socket, expected if socket was closed", e);
@@ -127,6 +135,17 @@ public class Server {
    */
   public void setPort(int port) {
     this.port = port;
+  }
+
+  /**
+   * If threaded mode is enabled, every client request will be handled in a separate thread; otherwise single thread
+   * will be handling all request. With threaded model server can handle multiple parallel concurrent requests;
+   * otherwise server will be handling one request at a time and will potentially block the caller
+   *
+   * @param threaded use threaded model or not
+   */
+  public void setThreaded(final boolean threaded) {
+    this.threaded = threaded;
   }
 
   public MailStore getMailStore() {

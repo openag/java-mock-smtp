@@ -27,7 +27,7 @@ public class JavaMailTest {
     message.setText("Hello!");
     mailSender.send(message);
 
-    Thread.sleep(100);
+    Thread.sleep(10);
 
     final MailMessage m = server.getMailStore().popMessage();
     assertEquals("Hello!", m.getText());
