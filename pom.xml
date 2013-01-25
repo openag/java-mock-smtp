@@ -48,6 +48,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2.1</version>
         <configuration>
+          <includePluginDependencies>true</includePluginDependencies>
           <mainClass>com.openag.mocksmtp.Main</mainClass>
           <systemProperties>
             <systemProperty>
@@ -60,6 +61,13 @@
             </systemProperty>
           </systemProperties>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
@@ -69,13 +77,6 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
-    </dependency>
-
-    <dependency> <!-- For standalone execution -->
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j.version}</version>
-      <scope>runtime</scope>
     </dependency>
 
     <dependency>
