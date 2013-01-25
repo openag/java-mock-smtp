@@ -151,4 +151,13 @@ public class Server {
   public MailStore getMailStore() {
     return mailStore;
   }
+
+  @Override
+  public String toString() {
+    return "Mock SMTP Server{" +
+        "host='" + host + '\'' +
+        ", port=" + port +
+        ", threaded=" + threaded +
+        '}';
+  }
 }

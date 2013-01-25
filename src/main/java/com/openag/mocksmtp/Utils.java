@@ -127,4 +127,12 @@ class Utils {
     return sb.toString();
   }
 
+  static int toInt(final String s) {
+    try {
+      return Integer.parseInt(s);
+    } catch (NumberFormatException e) {
+      return -1;
+    }
+  }
+
 }
