@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import static com.openag.mocksmtp.MailMessage.toMessage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -63,7 +64,7 @@ public class LoadTestWithJavaMail {
 
       int count = 0;
       MailMessage message;
-      while ((message = store.popMessage()) != null) {
+      while ((message = toMessage(store.pop())) != null) {
         assertTrue(message.getFrom().equals(message.getText()));
         ++count;
       }

@@ -46,7 +46,7 @@ public class Server {
   /**
    * Storage for incoming mail messages
    */
-  private final SimpleMailStore mailStore = new SimpleMailStore();
+  private SimpleMailStore mailStore = new SimpleMailStore();
 
   /**
    * Starts the SMTP server (binds the SMTP server socket, prepares necessary threads, ...). This method MUST be called
@@ -56,8 +56,6 @@ public class Server {
    * @throws IOException
    */
   public void start() throws IOException {
-    mailStore.clear();
-
     final InetSocketAddress address = new InetSocketAddress(host, port);
 
     serverSocket = new ServerSocket();
@@ -150,6 +148,10 @@ public class Server {
 
   public MailStore getMailStore() {
     return mailStore;
+  }
+
+  public void setMailStore(SimpleMailStore mailStore) {
+    this.mailStore = mailStore;
   }
 
   @Override

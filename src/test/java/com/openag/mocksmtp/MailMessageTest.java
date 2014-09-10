@@ -20,7 +20,7 @@ public class MailMessageTest {
         "Hello!";
 
 
-    final MailMessage message = new MailMessage(sample);
+    final MailMessage message = MailMessage.toMessage(sample);
     assertEquals("Hello!", message.getText());
     assertEquals("sender@test", message.getFrom());
     assertArrayEquals(new String[]{"receiver1@test", "receiver2@test"}, message.getTo());

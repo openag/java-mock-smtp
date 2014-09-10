@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import static com.openag.mocksmtp.MailMessage.toMessage;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -37,7 +38,7 @@ public class JavaMailTest {
 
     Thread.sleep(10);
 
-    final MailMessage m = server.getMailStore().popMessage();
+    final MailMessage m = toMessage(server.getMailStore().pop());
     assertEquals("Hello!", m.getText());
 
     server.stop();

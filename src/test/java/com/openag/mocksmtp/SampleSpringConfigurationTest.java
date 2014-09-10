@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
+import static com.openag.mocksmtp.MailMessage.toMessage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -31,7 +32,7 @@ public class SampleSpringConfigurationTest {
 
   @Test
   public void testSpringConfiguration() throws Exception {
-    assertNull(mailStore.popMessage());
+    assertNull(mailStore.pop());
 
     final SimpleMailMessage message = new SimpleMailMessage();
     message.setTo("test@test");
@@ -40,7 +41,7 @@ public class SampleSpringConfigurationTest {
 
     Thread.sleep(10);
 
-    final MailMessage result = mailStore.popMessage();
+    final MailMessage result = toMessage(mailStore.pop());
     assertEquals("spring-config-test", result.getText());
   }
 

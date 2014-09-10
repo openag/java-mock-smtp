@@ -28,7 +28,7 @@ public class MailMessage {
    *
    * @param s raw email message payload as it is sent via SMTP
    */
-  MailMessage(final String s) {
+  private MailMessage(final String s) {
     this.rawMessage = s;
 
     final BufferedReader in = new BufferedReader(new StringReader(s));
@@ -48,10 +48,14 @@ public class MailMessage {
     }
   }
 
+  public static MailMessage toMessage(String s) {
+    return new MailMessage(s);
+  }
+
+
   public String getText() {
     return text;
   }
-
 
   public String getFrom() {
     return headers.get("From");
