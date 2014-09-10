@@ -13,6 +13,17 @@
     <spring.version>4.0.5.RELEASE</spring.version>
   </properties>
 
+  <distributionManagement>
+    <repository>
+      <id>openag</id>
+      <url>https://ci.openag.com/nexus/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>openag</id>
+      <url>https://ci.openag.com/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <build>
     <plugins>
       <plugin>

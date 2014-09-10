@@ -16,9 +16,9 @@ class Connection implements Runnable {
 
   private final Socket socket;
   private final Conversation conversation;
-  private final SimpleMailStore mailStore;
+  private final MailStore mailStore;
 
-  Connection(final Socket socket, SimpleMailStore mailStore) throws IOException {
+  Connection(final Socket socket, MailStore mailStore) throws IOException {
     this.socket = socket;
     this.conversation = new Conversation(socket.getInputStream(), socket.getOutputStream());
     this.mailStore = mailStore;

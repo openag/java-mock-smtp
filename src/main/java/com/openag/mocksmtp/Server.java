@@ -46,7 +46,7 @@ public class Server {
   /**
    * Storage for incoming mail messages
    */
-  private SimpleMailStore mailStore = new SimpleMailStore();
+  private MailStore mailStore = new SimpleMailStore();
 
   /**
    * Starts the SMTP server (binds the SMTP server socket, prepares necessary threads, ...). This method MUST be called
@@ -150,7 +150,7 @@ public class Server {
     return mailStore;
   }
 
-  public void setMailStore(SimpleMailStore mailStore) {
+  public void setMailStore(MailStore mailStore) {
     this.mailStore = mailStore;
   }
 
